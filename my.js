@@ -1,4 +1,5 @@
 let teendoBox = document.getElementById("teendoBox");
+let hozzaadInput = document.getElementById("UjElem");
 
 let teendokData = null;
 
@@ -57,9 +58,39 @@ function KijeloltTorles() {
         if(teendo.checkBox.checked){
             teendoBox.removeChild(teendo.checkBox.parentNode);
         }else{
-            fennMaradoELemek.push(teendo);
+            fennMaradoElemek.push(teendo);
         }
     }
 
     teendokData = fennMaradoElemek;
+}
+
+
+function hozzaad(){
+    let nev = hozzaadInput.value;
+
+    let element = {
+        teendők: nev
+    }
+    teendokData.push(element);
+
+
+    let doboz = document.createElement("div");
+    let checkBox = document.createElement("input");
+    checkBox.type = "checkBox";
+    let span = document.createElement("span");
+    span.innerHTML = element.teendők;
+    doboz.appendChild(span);
+    doboz.appendChild(checkBox);
+    teendoBox.appendChild(doboz);
+
+    element.checkBox = checkBox;
+
+    checkBox.onchange = function(){
+        if(checkBox.checked){
+            span.style.textDecoration = "line-through";
+        }else{
+            span.style.textDecoration = "initial";
+        }
+    }
 }
